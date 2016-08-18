@@ -242,9 +242,120 @@ $("a").on("click", function handleClick(event){
 });
 ```
 
+
+### Event Targets, Bubbling, Delegation
+
+With each event in the DOM there is a `target`. For example, when a user clicks an image, the `target` would be the image that was actually clicked.
+
+
+#### Event Targets
+
+Consider the following snippets:
+
+`index.html`
+
+```html
+	<img id="kittenPic" src="http://petnamesplace.com/wp-content/uploads/2009/12/kitten-names-copy.jpg"></img>
+```
+
+`app.js`
+
+```js
+
+var kitten = $("#kittenPic");
+
+kitten.on("click", function (event) {
+  console.log(this);
+	console.log(event.target);
+});
+
+```
+
+
+#### Event Bubbling
+
+This might seem very straightforward, but in reality the `event.target` is not always the only element that knows about the click.
+
+
+`index.html`
+
+```html
+<div id="kittenCon">
+  <img id="kittenPic" src="http://petnamesplace.com/wp-content/uploads/2009/12/kitten-names-copy.jpg"></img>
+</div>
+```
+
+
+
+`app.js`
+
+```js
+
+var kittenContainer = $("#kittenCon");
+
+kittenContainer.on("click", function (event) {
+  console.log(this);
+  console.log(event.target);
+});
+
+```
+
+Note that that when we click the image we also click anything containing the image - the `#kittenCon` `<div>`, the `<body>`, the whole `document` and `window` objects.
+
+###Event Delegation
+
+Event bubbling enables a tactic called event delegation - attaching an event listener to a parent element when we actually want to listen for events on its children.  
+
+This is most useful when the children aren't there when the page loads. It's impossible to attach an event listener to something that doesn't exist yet!
+
+Let's add a box 3 seconds after the DOM is ready to simulate content that we might have to wait for, like user input or results from an external API.
+
+We'll try to attach an event handler to it directly, as soon as the DOM is ready.
+
+We might try:
+`app.js`
+
+```js
+  $(document).ready(function(){
+    // ...
+    window.setTimeout(addBox, 3000);
+    $(".box").on("click", toggleLongBox);
+  });
+
+  function addBox(){
+    console.log("adding a box!");
+    newBox = $('<div class="box"></div>');
+    $('#box-container').prepend(newBox);
+  }
+
+  function toggleLongBox(event){
+    $(this).toggleClass("long-box");
+  }
+```
+
+The box doesn't respond to clicks because we tried to add the event listener too early!
+
+A common strategy is to add the event listener that _will contain_ the elements when they exist. Usually, developers add a special container in the HMTL. We have a div set up with id `"box-container"`.
+
+The `.on` method of jQuery conveniently lets us add an argument to specify which child elements should respond to an event if their parent is listening.
+
+`app.js`
+```js
+$(document).ready(function(){
+  // ...
+  window.setTimeout(addBox, 3000);
+  // $(".box").on("click", toggleLongBox);  // didn't work!
+  $("#box-container").on("click", ".box", toggleLongCon);
+});
+
+function toggleLongCon(event){
+  $(event.target).toggleClass("long-box");
+}
+```
+
 ### Independent Practice
 
-Practice with this [training](https://github.com/sf-wdi-31/jquery-events-training).  
+Practice with this event medley  [training](https://github.com/sf-wdi-31/jquery-events-training).  
 
 
 ### Closing Thoughts
@@ -254,3 +365,5 @@ Practice with this [training](https://github.com/sf-wdi-31/jquery-events-trainin
 * Practice selecting DOM elements. This can be done with native JavaScript language features, but we're mainly going to use jQuery library methods.
 
 * Remember, jQuery is a library, not a language.
+
+* Events bubble; we can use this to our advantage!
