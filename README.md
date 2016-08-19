@@ -38,16 +38,16 @@ A **callback** is a function that is passed into another function as an argument
 ```js
 
 function higherOrderFunction (phrase, callback) {
-  console.log("I'm the first class function, now calling the callback...");
-  callback(phrase);
+	console.log("I'm the first class function, now calling the callback...");
+	callback(phrase);
 }
 
 function shoutItCallback(message){
-  console.log(message.toUpperCase());
+	console.log(message.toUpperCase());
 }
 
 function splitItCallback(str){
-  console.log(str.split(""));
+	console.log(str.split(""));
 }
 
 higherOrderFunction("Functions are fun!", shoutItCallback);
@@ -63,12 +63,12 @@ var numbers = [123, 45, 0];
 numbers.forEach(isEven);
 
 function isEven(num){
-  if (num % 2 === 0){
-    console.log(num + " is even!");
-    return true;
-  } else {
-    console.log(num + " is odd!");
-  }
+	if (num % 2 === 0){
+    	console.log(num + " is even!");
+    	return true;
+	} else {
+    	console.log(num + " is odd!");
+	}
 }
 ```
 
@@ -78,12 +78,12 @@ Often, the callback function definition is written inside the higher order funct
 ```js
 var numbers = [123, 45, 0];
 numbers.forEach(function isEven(num){
-  if (num % 2 === 0){
-    console.log(num + " is even!");
-    return true;
-  } else {
-    console.log(num + " is odd!");
-  }
+	if (num % 2 === 0){
+		console.log(num + " is even!");
+		return true;
+	} else {
+		console.log(num + " is odd!");
+	}
 });
 ```
 
@@ -145,7 +145,7 @@ Here's how this looks all together with "vanilla" or "native" JavaScript:
   greeting.addEventListener('mouseover', popUpYay);
 
   function popUpYay(event){
-    alert("Yay!");
+      alert("Yay!");
   }
 ```
 
@@ -156,7 +156,7 @@ var greeting = $('#greeting');
 greeting.on('mouseover', popUpYay);
 
 function popUpYay(event){
-  alert('Yay!');
+    alert('Yay!');
 }
 ```
 Sometimes you will see this shorthand:
@@ -185,7 +185,7 @@ Open your developer console on [jQuery.com](https://jquery.com).
 
   <details>
     <summary>answer</summary>
-    ``` javascript
+    ```js
     $(window).on("scroll", function handleScroll(){
         console.log("just keep scrolling, scrolling, scrolling");
     })
@@ -196,7 +196,7 @@ Open your developer console on [jQuery.com](https://jquery.com).
 
   <details>
     <summary>answer</summary>
-    ``` javascript
+    ```js
     $(window).on("scroll", function handleScroll(){
         $("body").append("<p>to infinity... and beyond!</p>");
     })
@@ -265,8 +265,8 @@ Consider the following snippets:
 var kitten = $("#kittenPic");
 
 kitten.on("click", function (event) {
-  console.log(this);
-	console.log(event.target);
+    console.log(this);
+    console.log(event.target);
 });
 
 ```
@@ -281,7 +281,7 @@ This might seem very straightforward, but in reality the `event.target` is not a
 
 ```html
 <div id="kittenCon">
-  <img id="kittenPic" src="http://petnamesplace.com/wp-content/uploads/2009/12/kitten-names-copy.jpg"></img>
+    <img id="kittenPic" src="http://petnamesplace.com/wp-content/uploads/2009/12/kitten-names-copy.jpg"></img>
 </div>
 ```
 
@@ -294,8 +294,8 @@ This might seem very straightforward, but in reality the `event.target` is not a
 var kittenContainer = $("#kittenCon");
 
 kittenContainer.on("click", function (event) {
-  console.log(this);
-  console.log(event.target);
+    console.log(this);
+    console.log(event.target);
 });
 
 ```
@@ -316,21 +316,21 @@ We might try:
 `app.js`
 
 ```js
-  $(document).ready(function(){
+$(document).ready(function(){
     // ...
     window.setTimeout(addBox, 3000);
     $(".box").on("click", toggleLongBox);
-  });
+});
 
-  function addBox(){
+function addBox(){
     console.log("adding a box!");
     newBox = $('<div class="box"></div>');
     $('#box-container').prepend(newBox);
-  }
+}
 
-  function toggleLongBox(event){
+function toggleLongBox(event){
     $(this).toggleClass("long-box");
-  }
+}
 ```
 
 The box doesn't respond to clicks because we tried to add the event listener too early!
@@ -342,14 +342,14 @@ The `.on` method of jQuery conveniently lets us add an argument to specify which
 `app.js`
 ```js
 $(document).ready(function(){
-  // ...
-  window.setTimeout(addBox, 3000);
-  // $(".box").on("click", toggleLongBox);  // didn't work!
-  $("#box-container").on("click", ".box", toggleLongCon);
+    // ...
+    window.setTimeout(addBox, 3000);
+    // $(".box").on("click", toggleLongBox);  // didn't work!
+    $("#box-container").on("click", ".box", toggleLongCon);
 });
 
 function toggleLongCon(event){
-  $(event.target).toggleClass("long-box");
+    $(event.target).toggleClass("long-box");
 }
 ```
 
