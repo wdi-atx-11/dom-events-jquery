@@ -215,7 +215,9 @@ We can get around this by putting `<script>` tags at very the bottom of the body
 In jQuery, there's a pattern that checks if the DOM is ready. It relies mostly on the `DOMContentLoaded` event, but it also accounts for some other specific events used by older browsers.  The jQuery method we use is `ready`, and we apply it to the document in a way that looks like jQuery event handling shorthand:
 
 ```js
-// code here does not wait for DOM to be ready
+// code up here does not wait for DOM to be ready
+
+
 $(document).ready(function(){
     // code in here DOES wait for DOM to be ready
     // best place for DOM element selectors
@@ -224,7 +226,7 @@ $(document).ready(function(){
 	greeting.on('mouseover', popUpYay);
 });
 
-// code here does not wait for DOM to be ready
+// code down here does not wait for DOM to be ready
 // great place to define functions, even if they interact with the DOM
 function popUpYay(event){
     alert('Yay!');
