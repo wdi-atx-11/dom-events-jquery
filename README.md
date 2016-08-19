@@ -126,7 +126,7 @@ Events tell us a lot of information. For example, a "click" event includes not j
 
 ### Event Listeners
 
-The browser is sending out these events all the time. In order to capture and act on them, we can add event listeners to elements. We'll use JavaScript to tell an element to *listen* for a certain type of event and what to do when that event occurs.
+The browser is sending out these events all the time. In order to act on them, we can add event listeners to elements. We'll use JavaScript to tell an element to *listen* for a certain type of event and what to do when that event occurs.
 
 
 So long as we know the name of the event we're listening for, we can "attach" or "bind" an event listener to our element!
@@ -165,7 +165,7 @@ Sometimes you will see this shorthand:
 $('#greeting').mouseover(popUpYay);
 ```
 
-The `.mouseover(...)` method is equivalent to `.on('mouseover', ...)`. We recommend using `.on`.
+The `.mouseover(...)` method is equivalent to `.on('mouseover', ...)`. We recommend using `.on` because it has some more flexibility through optional parameters. 
 
 ####Check for Understanding
 
@@ -179,9 +179,9 @@ In the last example:
 
 Open your developer console on [jQuery.com](https://jquery.com).
 
-1. Can you capture the `scroll` event?
-  <details><summary>Hint</summary>The subject listening should be the `window` object - try using `$(window)`).</details>  
-  Add a simple event handler to `console.log` a message every time the event occurs.
+Let's add some behavior for the scroll event for the entire window.  Try selecting the browser's `window` object using `$(window)`.
+
+1. Add an event listener to detect the "scroll" event for the window and `console.log` a message every time the event occurs.
 
   <details>
     <summary>answer</summary>
@@ -202,6 +202,37 @@ Open your developer console on [jQuery.com](https://jquery.com).
     })
     ```
   </details>
+ 
+### `$(document).ready...`
+
+User actions can cause the browser to "emit" (send) some kinds of events, but the browser also emits extra events that might be useful for developers. The most important one is `DOMContentLoaded`, which gets sent when the browser is finished creating the Document Object Model.  Before the `DOMContentLoaded` event occurs, the browser is still working on tasks like deciding which CSS rules apply to particular HTML elements.  Before the `DOMContentLoaded` event occurs, the DOM elements aren't on the page yet.  So if you try to select a DOM element before that event, it won't be there!
+
+**Any code that relies on DOM elements being ready MUST happen after the `DOMContentLoaded` event!**
+
+
+We can get around this by putting `<script>` tags at very the bottom of the body, because by the time the browser is working on the bottom of the body we can expect the rest of the content is loaded.  However, you'll often see `<script>` tags listed in the head of an HTML file.  In that case, it's important to explicitly listen for the `DOMContentLoaded` event!
+
+In jQuery, there's a pattern that checks if the DOM is ready. It relies mostly on the `DOMContentLoaded` event, but it also accounts for some other specific events used by older browsers.  The jQuery method we use is `ready`, and we apply it to the document in a way that looks like jQuery event handling shorthand:
+
+```js
+// code here does not wait for DOM to be ready
+$(document).ready(function(){
+    // code in here DOES wait for DOM to be ready
+    // best place for DOM element selectors
+    // best place to *call* functions that interact with the DOM 
+    var greeting = $('#greeting');
+	greeting.on('mouseover', popUpYay);
+});
+
+// code here does not wait for DOM to be ready
+// great place to define functions, even if they interact with the DOM
+function popUpYay(event){
+    alert('Yay!');
+    // DOM interaction is planned here - but only gets executed when function is called
+    $('body').append('Yay!'); 
+}
+```
+
 
 
 ### Default Behaviors
@@ -255,7 +286,7 @@ Consider the following snippets:
 `index.html`
 
 ```html
-	<img id="kittenPic" src="http://petnamesplace.com/wp-content/uploads/2009/12/kitten-names-copy.jpg"></img>
+<img id="kittenPic" src="http://petnamesplace.com/wp-content/uploads/2009/12/kitten-names-copy.jpg"></img>
 ```
 
 `app.js`
