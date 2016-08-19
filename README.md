@@ -203,7 +203,7 @@ Let's add some behavior for the scroll event for the entire window.  Try selecti
     ```
   </details>
  
-### `$(document).ready...`
+### Checking that the DOM is Ready
 
 User actions can cause the browser to "emit" (send) some kinds of events, but the browser also emits extra events that might be useful for developers. The most important one is `DOMContentLoaded`, which gets sent when the browser is finished creating the Document Object Model.  Before the `DOMContentLoaded` event occurs, the browser is still working on tasks like deciding which CSS rules apply to particular HTML elements.  Before the `DOMContentLoaded` event occurs, the DOM elements aren't on the page yet.  So if you try to select a DOM element before that event, it won't be there!
 
