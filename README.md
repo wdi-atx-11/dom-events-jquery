@@ -249,7 +249,7 @@ Here's part of a site's `index.html`:
 </ul>
 ``` 
   
-Assume the JavaScript file below is linked with a `<script>` tag in the head of `index.html`.  
+Assume the JavaScript file below is linked with a `<script>` tag in the head of `index.html`.  What mistake(s) do you see in the code below?
 
 `app.js`
 
@@ -267,7 +267,7 @@ function updateFeaturedClickCount(){
 }
 ```
 
-**What is wrong with the JavaScript snippet above?**
+
 
 <details>
 <summary>answer</summary>
