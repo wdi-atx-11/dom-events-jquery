@@ -236,6 +236,63 @@ function popUpYay(event){
 ```
 
 
+#### Check for Understading
+
+Here's part of a site's `index.html`:
+
+```html
+<p>Featured click count: <span id="click-count"></span></p>
+<ul>
+	<li class="featured">1</li>
+	<li>2</li>
+	<li class="featured">3</li>
+</ul>
+``` 
+  
+Assume the JavaScript file below is linked with a `<script>` tag in the head of `index.html`.  
+
+`app.js`
+
+```js
+var clickCount = 0;
+$('#click-count').text('0');
+
+$(document).ready(function(){
+    $('.featured').on('click', updateFeaturedClickCount);
+});
+
+function updateFeaturedClickCount(){
+	clickCount = clickCount + 1;
+	$('#click-count').text(clickCount);
+}
+```
+
+**What is wrong with the JavaScript snippet above?**
+
+<details>
+<summary>answer</summary>
+The only issue is that the text inside the `#click-count` span doesn't initially show 0. The line that tries to make this change, `$('#click-count').text('0');` happens outside `$(document).ready(/* ... */)`, which means it happens before the span is loaded into the DOM. 
+
+Here's a version that works:
+  
+`app.js`
+
+```js
+var clickCount = 0;
+
+$(document).ready(function(){
+    $('#click-count').text('0');
+    $('.featured').on('click', updateFeaturedClickCount);
+});
+
+function updateFeaturedClickCount(){
+	clickCount = clickCount + 1;
+	$('#click-count').text(clickCount);
+}
+```
+
+</details>
+
 
 ### Default Behaviors
 
