@@ -126,6 +126,8 @@ Events tell us a lot of information. For example, a "click" event includes not j
 	* DOM element that got clicked.
 	* Time (timestamp) when it happened.
 
+You can see some of this information if you use [event listener breakpoints](https://developers.google.com/web/tools/chrome-devtools/javascript/add-breakpoints#events) when looking at events in the Chrome JavaScript console.
+
 ### Event Listeners
 
 The browser is sending out these events all the time. In order to act on them, we can add event listeners to elements. We'll use JavaScript to tell an element to *listen* for a certain type of event and what to do when that event occurs.
@@ -172,6 +174,7 @@ The `.mouseover(...)` method is equivalent to `.on('mouseover', ...)`. We recomm
 ####Check for Understanding
 
 In the last example:
+
   * What is listening for the event?
   * What trigger are we waiting for?
   * What is the action tied to this event?
@@ -434,6 +437,7 @@ A common strategy is to add the event listener that _will contain_ the elements 
 The `.on` method of jQuery conveniently lets us add an argument to specify which child elements should respond to an event if their parent is listening.
 
 `app.js`
+
 ```js
 $(document).ready(function(){
     // ...
