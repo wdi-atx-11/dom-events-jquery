@@ -11,7 +11,7 @@ Location: SF
 <!-- framing the "why" in big-picture/real world examples -->
 *This workshop is important because:*
 
-Most of the interactivity for JavaScript in the web is based around events.  The browser detect user actions or page status changes and "emits" or sends out an event. Developers then specify behaviors that will happen when a particular event occurs.
+Most of the interactivity for JavaScript in the web is based around events.  The browser detects user actions or page status changes and "emits" or sends out an event. Developers then specify behaviors that will happen when a particular event occurs.
 
 ### What are the objectives?
 <!-- specific/measurable goal for students to achieve -->
@@ -33,7 +33,9 @@ Most of the interactivity for JavaScript in the web is based around events.  The
 
 ### Aside: Callbacks
 
-A **callback** is a function that is passed into another function as an argument and then used. A function that can take in a callback as an argument is known as a higher order function.
+![callback](http://i.giphy.com/xT8qBu5gOYEqHhgDQs.gif)
+
+A **callback** is a function that is passed into another function as an argument and then used. A function that can take in a callback as an argument is known as a **higher order function**.
 
 ```js
 
