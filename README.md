@@ -99,7 +99,7 @@ In these cases, the callback often won't be given a name.  A function without a 
 
 **Events are always happening!**
 
-![Click Event](http://www.createursoftware.net/Windows/XP/img/tous/gif/clicking.gif)
+![Click Event](http://i.giphy.com/l0HlL2I8DbNa6JCJa.gif)
 
 In Chrome, we can use the following utility function to log some events occurring in the window:
 
