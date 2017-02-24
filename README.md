@@ -311,7 +311,7 @@ As a digital native, you take these behaviors for granted:
 Try this on [jQuery's homepage](http://jquery.com/):
 
 ```js
-var $links = $("a"); // every link on the page
+var $links = $('a'); // every link on the page
 $links.on("click", function handleClick(event){
     alert("You just clicked a link. You are about to be redirected.");
 });
@@ -324,7 +324,7 @@ We have two options: we can `return false` or we can use a special method called
 **`.preventDefault()`** (preferred because it is explicit):
 
 ```js
-$("a").on("click", function handleClick(event){
+$('a').on("click", function handleClick(event){
     event.preventDefault();
     // more code down here
 });
@@ -333,7 +333,7 @@ $("a").on("click", function handleClick(event){
 **`return false`** (this works too!):
 
 ```js
-$("a").on("click", function handleClick(event){
+$('a').on("click", function handleClick(event){
     // more code up here
     return false;
 });
@@ -359,7 +359,7 @@ Consider the following snippets:
 
 ```js
 
-var kitten = $("#kittenPic");
+var kitten = $('#kittenPic');
 
 kitten.on("click", function (event) {
     console.log(this);
@@ -388,7 +388,7 @@ This might seem very straightforward, but in reality the `event.target` is not a
 
 ```js
 
-var kittenContainer = $("#kittenCon");
+var kittenContainer = $('#kittenCon');
 
 kittenContainer.on("click", function (event) {
     console.log(this);
@@ -416,7 +416,7 @@ We might try:
 $(document).ready(function(){
     // ...
     window.setTimeout(addBox, 3000);
-    $(".box").on("click", toggleLongBox);
+    $('.box').on("click", toggleLongBox);
 });
 
 function addBox(){
@@ -442,8 +442,8 @@ The `.on` method of jQuery conveniently lets us add an argument to specify which
 $(document).ready(function(){
     // ...
     window.setTimeout(addBox, 3000);
-    // $(".box").on("click", toggleLongBox);  // didn't work!
-    $("#box-container").on("click", ".box", toggleLongCon);
+    // $('.box').on("click", toggleLongBox);  // didn't work!
+    $('#box-container').on("click", ".box", toggleLongCon);
 });
 
 function toggleLongCon(event){
