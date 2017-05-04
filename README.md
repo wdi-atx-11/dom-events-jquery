@@ -34,7 +34,7 @@ Most of the interactivity for JavaScript in the web is based around events.  The
 ### Aside: Callbacks
 
 ![callback](http://i.giphy.com/xT8qBu5gOYEqHhgDQs.gif)
-
+<!-- Check for Understanding: Ask a random student to explain a callback in their own words  -->
 A **callback** is a function that is passed into another function as an argument and then used. A function that can take in a callback as an argument is known as a **higher order function**.
 
 ```js
@@ -169,9 +169,9 @@ Sometimes you will see this shorthand:
 $('#greeting').mouseover(popUpYay);
 ```
 
-The `.mouseover(...)` method is equivalent to `.on('mouseover', ...)`. We recommend using `.on` because it has some more flexibility through optional parameters. 
+The `.mouseover(...)` method is equivalent to `.on('mouseover', ...)`. We recommend using `.on` because it has some more flexibility through optional parameters.
 
-####Check for Understanding
+#### Check for Understanding
 
 In the last example:
 
@@ -180,7 +180,7 @@ In the last example:
   * What is the action tied to this event?
   * When is the `popUpYay` function actually executed?
 
-####Check for Understanding
+#### Check for Understanding
 
 Open your developer console on [jQuery.com](https://jquery.com).
 
@@ -190,34 +190,34 @@ Let's add some behavior for the scroll event for the entire window.  Try selecti
 
   <details>
     <summary>answer</summary>
-    ```js
+    <pre><code>
     $(window).on("scroll", function handleScroll(){
         console.log("just keep scrolling, scrolling, scrolling");
     })
-    ```
+    </code></pre>
   </details>
 
 2. Modify your event handler so it adds a new paragraph, `<p>to infinity... and beyond!</p>`, at the bottom of the page every time the user scrolls.
 
   <details>
     <summary>answer</summary>
-    ```js
+    <pre><code>
     $(window).on("scroll", function handleScroll(){
         $("body").append("<p>to infinity... and beyond!</p>");
     })
-    ```
+    </code></pre>
   </details>
- 
+
 ### Checking that the DOM is Ready
 
-User actions can cause the browser to "emit" (send) some kinds of events, but the browser also emits extra events that might be useful for developers. The most important one is `DOMContentLoaded`, which gets sent when the browser is finished creating the Document Object Model. 
+User actions can cause the browser to "emit" (send) some kinds of events, but the browser also emits extra events that might be useful for developers. The most important one is `DOMContentLoaded`, which gets sent when the browser is finished creating the Document Object Model.
 
 Before the `DOMContentLoaded` event occurs, the browser is still working on tasks like deciding which CSS rules apply to particular HTML elements.  Before the `DOMContentLoaded` event occurs, the DOM elements aren't on the page yet.  So if you try to select a DOM element before that event, it won't be there!
 
 **Any code that relies on DOM elements being ready MUST happen after the `DOMContentLoaded` event!**
 
 
-We can get around this by putting `<script>` tags at very the bottom of the body, because by the time the browser is working on the bottom of the body we can expect the rest of the content is loaded.  However, you'll often see `<script>` tags listed in the head of an HTML file.  In that case, it's important to explicitly listen for the `DOMContentLoaded` event! 
+We can get around this by putting `<script>` tags at very the bottom of the body, because by the time the browser is working on the bottom of the body we can expect the rest of the content is loaded.  However, you'll often see `<script>` tags listed in the head of an HTML file.  In that case, it's important to explicitly listen for the `DOMContentLoaded` event!
 
 In jQuery, there's a method to check if the DOM is ready. It relies mostly on the `DOMContentLoaded` event, but as a bonus it also accounts for some other specific events used by older browsers.  The jQuery method we use is `ready`, and we apply it to the document in a way that looks like jQuery event handling shorthand:
 
@@ -228,7 +228,7 @@ In jQuery, there's a method to check if the DOM is ready. It relies mostly on th
 $(document).ready(function(){
     // code in here DOES wait for DOM to be ready
     // best place for DOM element selectors
-    // best place to *call* functions that interact with the DOM 
+    // best place to *call* functions that interact with the DOM
     var greeting = $('#greeting');
 	greeting.on('mouseover', popUpYay);
 });
@@ -238,7 +238,7 @@ $(document).ready(function(){
 function popUpYay(event){
     alert('Yay!');
     // DOM interaction is planned here - but only gets executed when function is called
-    $('body').append('Yay!'); 
+    $('body').append('Yay!');
 }
 ```
 
@@ -254,8 +254,8 @@ Here's part of a site's `index.html`:
 	<li>2</li>
 	<li class="featured">3</li>
 </ul>
-``` 
-  
+```
+
 Assume the JavaScript file below is linked with a `<script>` tag in the head of `index.html`.  What mistake(s) do you see in the code below?
 
 `app.js`
@@ -278,13 +278,13 @@ function updateFeaturedClickCount(){
 
 <details>
 <summary>answer</summary>
-The only issue is that the text inside the `#click-count` span doesn't initially show 0. The line that tries to make this change, `$('#click-count').text('0');` happens outside `$(document).ready(/* ... */)`, which means it happens before the span is loaded into the DOM. 
+The only issue is that the text inside the `#click-count` span doesn't initially show 0. The line that tries to make this change, `$('#click-count').text('0');` happens outside `$(document).ready(/* ... */)`, which means it happens before the span is loaded into the DOM.
 
-Here's a version that works:
-  
+Here's a version that works:  
+
 `app.js`
 
-```js
+<pre><code>
 var clickCount = 0;
 
 $(document).ready(function(){
@@ -296,7 +296,7 @@ function updateFeaturedClickCount(){
 	clickCount = clickCount + 1;
 	$('#click-count').text(clickCount);
 }
-```
+</code></pre>
 
 </details>
 
@@ -399,7 +399,7 @@ kittenContainer.on("click", function (event) {
 
 Note that that when we click the image we also click anything containing the image - the `#kittenCon` `<div>`, the `<body>`, the whole `document` and `window` objects.
 
-###Event Delegation
+### Event Delegation
 
 Event bubbling enables a tactic called event delegation - attaching an event listener to a parent element when we actually want to listen for events on its children.  
 
