@@ -278,7 +278,7 @@ function updateFeaturedClickCount(){
 
 <details>
 <summary>answer</summary>
-The only issue is that the text inside the `#click-count` span doesn't initially show 0. The line that tries to make this change, `$('#click-count').text('0');` happens outside `$(document).ready(/* ... */)`, which means it happens before the span is loaded into the DOM.
+The only issue is that the text inside the <code>#click-count</code> span doesn't initially show 0. The line that tries to make this change, <code>$('#click-count').text('0');</code> happens outside <code>$(document).ready(/* ... */)</code>, which means it happens before the span is loaded into the DOM.
 
 Here's a version that works:  
 
